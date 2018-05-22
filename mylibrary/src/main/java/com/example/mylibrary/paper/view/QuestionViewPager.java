@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
  */
 public class QuestionViewPager extends ViewPager {
 
-
+    private static final int Back_Duration=500;
     private ViewPageHelper helper;
     public QuestionViewPager(Context context) {
         this(context, null);
@@ -50,9 +50,9 @@ public class QuestionViewPager extends ViewPager {
         if(Math.abs(getCurrentItem()-item)>1){
             scroller.setMDuration(0);
             super.setCurrentItem(item, smoothScroll);
-            scroller.setMDuration(300);
+            scroller.setMDuration(Back_Duration);
         }else{
-            scroller.setMDuration(300);
+            scroller.setMDuration(Back_Duration);
             super.setCurrentItem(item, smoothScroll);
         }
     }

@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class QuestionActivity extends AppCompatActivity implements QuestionFragment.OnModifyQuestionListener {
+public class QuestionActivity extends AppCompatActivity implements QuestionFragment.OnModifyQuestionListener,View.OnClickListener{
 
     private SlidingUpPanelLayout mLayout;
     private TopicAdapter topicAdapter;
@@ -57,34 +57,11 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
         }
 
         initReadViewPager();
-
-        Button bt_pre = (Button) findViewById(R.id.bt_pre);
-        Button bt_next = (Button) findViewById(R.id.bt_next);
+        findViewById(R.id.bt_pre).setOnClickListener(this);
+        findViewById(R.id.bt_next).setOnClickListener(this);
         TextView tvNumbers = (TextView) findViewById(R.id.tv_numbers);
         tvNumbers.setText("0/"+dataBeans.size());
-        bt_pre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public synchronized void onClick(View v) {
-                int currentItem = questionViewPager.getCurrentItem();
-                currentItem = currentItem - 1;
-                if (currentItem > dataBeans.size() - 1) {
-                    currentItem = dataBeans.size() - 1;
-                }
-                questionViewPager.setCurrentItem(currentItem);
-            }
-        });
 
-        bt_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public synchronized void onClick(View v) {
-                int currentItem = questionViewPager.getCurrentItem();
-                currentItem = currentItem + 1;
-                if (currentItem < 0) {
-                    currentItem = 0;
-                }
-                questionViewPager.setCurrentItem(currentItem);
-            }
-        });
     }
 
     private int prePosition2;
@@ -241,9 +218,46 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
         return null;
     }
 
+    /**
+     * 上一题
+     */
+    private synchronized void preQuestion(){
+        int currentItem = questionViewPager.getCurrentItem();
+        currentItem = currentItem - 1;
+        if (currentItem > dataBeans.size() - 1) {
+            currentItem = dataBeans.size() - 1;
+        }
+        questionViewPager.setCurrentItem(currentItem);
+    }
+
+    /**
+     * 下一题
+     */
+    private synchronized void nextQuestion(){
+        int currentItem = questionViewPager.getCurrentItem();
+        currentItem = currentItem + 1;
+        if (currentItem < 0) {
+            currentItem = 0;
+        }
+        questionViewPager.setCurrentItem(currentItem);
+    }
+
     @Override
     public void modifyQuestion(int selectId, int position) {
         QuestionInfo.Data.DataBean dataBeanTemp = dataBeans.get(position);
         dataBeanTemp.setQuestion_select(selectId);
+        nextQuestion();
+    }
+
+    @Override
+    public synchronized void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_pre:
+                preQuestion();
+                break;
+            case R.id.bt_next:
+                nextQuestion();
+                break;
+        }
     }
 }
