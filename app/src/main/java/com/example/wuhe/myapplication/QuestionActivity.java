@@ -187,9 +187,9 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
 
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
-                if(newState==SlidingUpPanelLayout.PanelState.DRAGGING){
-                    MoveToPosition();
-                }
+               if(newState==SlidingUpPanelLayout.PanelState.COLLAPSED){
+                   MoveToPosition();
+               }
             }
         });
         mLayout.setFadeOnClickListener(new View.OnClickListener() {
@@ -204,19 +204,7 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
      * 滚动 recycleView 到当前选择的位置
      */
     private void MoveToPosition(){
-        //滚动 recycleView 方法1 （能够避免指针错误）
-        int firstItem = gridLayoutManager.findFirstVisibleItemPosition();
-        int lastItem = gridLayoutManager.findLastVisibleItemPosition();
-        if (curPosition <= firstItem) {
-            recyclerView.scrollToPosition(curPosition);
-        } else if (curPosition <= lastItem) {
-            int top = recyclerView.getChildAt(curPosition - firstItem).getTop();
-            recyclerView.scrollBy(0, top);
-        } else {
-            recyclerView.scrollToPosition(curPosition);
-        }
-        //滚动 recycleView 方法2  方法1 优于方法2
-        //gridLayoutManager.scrollToPositionWithOffset(curPosition, 0);
+        gridLayoutManager.scrollToPositionWithOffset(curPosition, 0);
     }
 
     @Override
