@@ -122,7 +122,7 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
                 topicAdapter.notifyPrePosition(prePosition2);
 
                 prePosition2 = curPosition2;
-
+                MoveToPosition();
             }
 
             @Override
@@ -204,7 +204,7 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
      * 滚动 recycleView 到当前选择的位置
      */
     private void MoveToPosition(){
-        gridLayoutManager.scrollToPositionWithOffset(curPosition, 0);
+        gridLayoutManager.scrollToPositionWithOffset(curPosition2, 0);
     }
 
     @Override
