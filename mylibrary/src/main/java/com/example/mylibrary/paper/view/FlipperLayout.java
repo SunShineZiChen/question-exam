@@ -112,7 +112,7 @@ public class FlipperLayout extends ViewGroup {
         mScroller = new Scroller(context);
         screenWidth = context.getResources().getDisplayMetrics().widthPixels;
         limitDistance = screenWidth / 2;
-        mShadowRight = getResources().getDrawable(R.drawable.shadow_right);
+        mShadowRight = getResources().getDrawable(R.drawable.shadow_right_light);
     }
 
 

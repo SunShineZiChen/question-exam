@@ -29,7 +29,7 @@
             android:id="@+id/shadowView"
             android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:background="@drawable/shadow_right" />
+            android:background="@drawable/shadow_right_light" />
 
     </FrameLayout>
 
