@@ -135,11 +135,11 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
 
     private int prePosition;
     private int curPosition;
-
+    GridLayoutManager gridLayoutManager;
     private void initList() {
         recyclerView = (RecyclerView) findViewById(R.id.list);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
+         gridLayoutManager = new GridLayoutManager(this, 6);
 
         topicAdapter = new TopicAdapter(this);
 
@@ -158,7 +158,6 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
                 }
 
                 questionViewPager.setCurrentItem(position);
-
 
                 topicAdapter.notifyCurPosition(curPosition);
                 topicAdapter.notifyPrePosition(prePosition);
@@ -183,23 +182,43 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
         mLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
-                Log.i("", "onPanelSlide, offset " + slideOffset);
+
             }
 
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
-                Log.i("", "onPanelStateChanged " + newState);
+                if(newState==SlidingUpPanelLayout.PanelState.DRAGGING){
+                    MoveToPosition();
+                }
             }
         });
         mLayout.setFadeOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MoveToPosition();
                 mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
         });
     }
 
+    /**
+     * 滚动 recycleView 到当前选择的位置
+     */
+    private void MoveToPosition(){
+        //滚动 recycleView 方法1 （能够避免指针错误）
+        int firstItem = gridLayoutManager.findFirstVisibleItemPosition();
+        int lastItem = gridLayoutManager.findLastVisibleItemPosition();
+        if (curPosition <= firstItem) {
+            recyclerView.scrollToPosition(curPosition);
+        } else if (curPosition <= lastItem) {
+            int top = recyclerView.getChildAt(curPosition - firstItem).getTop();
+            recyclerView.scrollBy(0, top);
+        } else {
+            recyclerView.scrollToPosition(curPosition);
+        }
+        //滚动 recycleView 方法2  方法1 优于方法2
+        //gridLayoutManager.scrollToPositionWithOffset(curPosition, 0);
+    }
 
     @Override
     public void onBackPressed() {
