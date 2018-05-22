@@ -195,7 +195,6 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
         mLayout.setFadeOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MoveToPosition();
                 mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
         });
