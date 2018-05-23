@@ -253,7 +253,7 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
     }
 
     @Override
-    public void modifyQuestion(int selectId, int position) {
+    public void modifyQuestion(int selectId, final int position) {
         QuestionInfo.Data.DataBean dataBeanTemp = dataBeans.get(position);
         /**
          * 未做过的题目 单项选择题选择后直接选择答案后延时进入下一题 ； 多项选择/题目选择后修改的  需要自行滑动活着点击下一题
@@ -262,10 +262,12 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
             //延时下一题
             new Handler().postDelayed(new Runnable(){
                 public void run() {
-                    //execute the task
-                    nextQuestion();
+                    if (position==curPosition2) {
+                        //execute the task
+                        nextQuestion();
+                    }
                 }
-            }, 800);
+            }, 500);
         }
         dataBeanTemp.setQuestion_select(selectId);
     }
