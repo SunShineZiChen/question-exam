@@ -15,8 +15,9 @@ import java.lang.reflect.Field;
  */
 public class QuestionViewPager extends ViewPager {
 
-    private static final int Back_Duration=500;
+    private static final int Back_Duration = 500;
     private ViewPageHelper helper;
+
     public QuestionViewPager(Context context) {
         this(context, null);
     }
@@ -26,12 +27,14 @@ public class QuestionViewPager extends ViewPager {
         super(context, attrs);
         setReadEffect();
         setScrollerDuration();
-        helper=new ViewPageHelper(this);
+        helper = new ViewPageHelper(this);
     }
+
     @Override
     public void setCurrentItem(int item) {
-        setCurrentItem(item,true);
+        setCurrentItem(item, true);
     }
+
     private void setScrollerDuration() {
         try {
             Field field = ViewPager.class.getDeclaredField("mScroller");
@@ -46,12 +49,12 @@ public class QuestionViewPager extends ViewPager {
 
     @Override
     public void setCurrentItem(int item, boolean smoothScroll) {
-        MScroller scroller=helper.getScroller();
-        if(Math.abs(getCurrentItem()-item)>1){
+        MScroller scroller = helper.getScroller();
+        if (Math.abs(getCurrentItem() - item) > 1) {
             scroller.setMDuration(0);
             super.setCurrentItem(item, smoothScroll);
             scroller.setMDuration(Back_Duration);
-        }else{
+        } else {
             scroller.setMDuration(Back_Duration);
             super.setCurrentItem(item, smoothScroll);
         }
@@ -60,6 +63,7 @@ public class QuestionViewPager extends ViewPager {
     public void setReadEffect() {
         setPageTransformer(true, new PageTransformer() {
             private static final float MIN_SCALE = 0.75f;
+
             @Override
             public void transformPage(View view, float position) {
                 int pageWidth = view.getWidth();

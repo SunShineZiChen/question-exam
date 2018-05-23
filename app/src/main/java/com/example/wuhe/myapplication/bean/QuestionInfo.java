@@ -28,7 +28,7 @@ public class QuestionInfo extends BaseInfo {
             case TYPE_Multiple_Choice:
                 return "多选题";
         }
-        return "";
+        return "单选题";
     }
     private Data data;
 

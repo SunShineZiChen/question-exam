@@ -104,7 +104,7 @@ public class QuestionFragment extends Fragment {
             }
         }, 0, tag.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(builder);
-        if (subDataBean.getOption_type() == QuestionInfo.TYPE_Multiple_Choice) {//多想选择题
+        if (subDataBean.getOption_type() == QuestionInfo.TYPE_Multiple_Choice) {//多项选择题
             updateCheckBoxView();
         } else {
             updateRadioView();
