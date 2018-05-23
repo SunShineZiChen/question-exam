@@ -32,6 +32,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.mylibrary.paper.utils.DensityUtils;
+import com.example.mylibrary.paper.utils.QuestionAnswerUtils;
 import com.example.wuhe.myapplication.R;
 import com.example.wuhe.myapplication.bean.QuestionInfo;
 
@@ -47,9 +48,6 @@ public class QuestionFragment extends Fragment {
     private View view;
     private OnModifyQuestionListener modifyQuestionListener;
 
-    public OnModifyQuestionListener getModifyQuestionListener() {
-        return modifyQuestionListener;
-    }
 
     public void setModifyQuestionListener(OnModifyQuestionListener modifyQuestionListener) {
         this.modifyQuestionListener = modifyQuestionListener;
@@ -96,11 +94,10 @@ public class QuestionFragment extends Fragment {
         builder.setSpan(new ImageSpan(getActivity(),R.drawable.text_background){
             @Override
             public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, Paint paint) {
-                paint.setColor(Color.BLUE);
-                paint.setTypeface(Typeface.create("normal", Typeface.NORMAL));
+                paint.setColor(Color.parseColor("#436EEE"));
                 paint.setTextSize(DensityUtils.sp2px(getContext(), 11));
                 canvas.drawText(text.subSequence(start, end).toString(), x+DensityUtils.dp2px(getContext(), 5), y-DensityUtils.dp2px(getContext(), 3), paint);
-                super.draw(canvas, text, start, end, x, top, y, bottom-DensityUtils.dp2px(getContext(), 2), paint);
+                super.draw(canvas, text, start, end, x, top, y, bottom-DensityUtils.dp2px(getContext(), 1), paint);
             }
         }, 0, tag.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(builder);
@@ -120,7 +117,7 @@ public class QuestionFragment extends Fragment {
         for (int i = 0; i < subDataBean.getOptions().size(); i++) {
             QuestionInfo.Data.DataBean.Option option = subDataBean.getOptions().get(i);
             CheckBox checkboxView = (CheckBox) LayoutInflater.from(getActivity()).inflate(R.layout.item_checkbox, null);
-            checkboxView.setText(option.getContent());
+            checkboxView.setText(QuestionAnswerUtils.getAnswerStr(i)+option.getContent());
             checkboxView.setTag(i);
             if (subDataBean.getQuestion_select() == i) {
                 checkboxView.setChecked(true);
@@ -148,16 +145,13 @@ public class QuestionFragment extends Fragment {
     private void updateRadioView() {
         final RadioGroup layout = (RadioGroup) view.findViewById(R.id.rg_options);
         layout.removeAllViews();
-        if(position==0){
-            Log.d("这个是数据", ""+subDataBean.getQuestion_select());
-        }
         int checkId = -1;
         for (int i = 0; i < subDataBean.getOptions().size(); i++) {
             QuestionInfo.Data.DataBean.Option option = subDataBean.getOptions().get(i);
             final RadioButton radioView = (RadioButton) LayoutInflater.from(getActivity()).inflate(R.layout.item_radio, null, true);
             RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT);
             radioView.setLayoutParams(layoutParams);
-            radioView.setText(option.getContent());
+            radioView.setText(QuestionAnswerUtils.getAnswerStr(i)+option.getContent());
             radioView.setTag(i);
             radioView.setId(i);
             if (subDataBean.getQuestion_select() == i) {

@@ -26,12 +26,17 @@
             android:id="@+id/check_options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
             android:orientation="vertical"></LinearLayout>
 
         <RadioGroup
             android:id="@+id/rg_options"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></RadioGroup>
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            ></RadioGroup>
     </LinearLayout>
 
 </FrameLayout>

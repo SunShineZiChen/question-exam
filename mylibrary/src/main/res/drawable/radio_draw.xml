@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:state_checked="false"
-        android:drawable="@drawable/answer_radio_normal" />
-    <item
-        android:state_checked="true"
-        android:drawable="@drawable/answer_radio_checked" />
+
+    <item android:drawable="@drawable/answer_radio_normal" android:state_checked="false" android:state_focused="false" android:state_pressed="false">
+        <!--<shape android:shape="oval" android:useLevel="false">-->
+            <!--<corners android:radius="3dp" />-->
+            <!--<stroke android:width="0.7dip" android:color="#436EEE" />-->
+            <!--<size android:width="20dp" android:height="20dp" />-->
+            <!--<padding android:left="50dp" />-->
+        <!--</shape>-->
+    </item>
+    <item android:drawable="@drawable/answer_radio_checked" android:state_checked="true" android:state_focused="false" android:state_pressed="false">
+    </item>
+    <item android:drawable="@drawable/answer_radio_normal" android:state_checked="false" android:state_focused="true" android:state_pressed="false">
+        <!--<shape android:shape="oval" android:useLevel="false">-->
+            <!--<corners android:radius="3dp" />-->
+            <!--<stroke android:width="0.7dip" android:color="#436EEE" />-->
+            <!--<size android:width="20dp" android:height="20dp" />-->
+            <!--<padding android:left="50dp" />-->
+        <!--</shape>-->
+    </item>
+    <item android:drawable="@drawable/answer_radio_checked" android:state_checked="true" android:state_focused="true" android:state_pressed="false">
+
+    </item>
 </selector>

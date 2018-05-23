@@ -1,5 +1,8 @@
 package com.example.wuhe.myapplication;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -8,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.example.mylibrary.paper.utils.DensityUtils;
 import com.example.mylibrary.paper.view.QuestionViewPager;
 import com.example.mylibrary.paper.view.SlidingUpPanelLayout;
 import com.example.wuhe.myapplication.adapter.TopicAdapter;
@@ -61,7 +68,9 @@ public class QuestionActivity extends AppCompatActivity implements QuestionFragm
         findViewById(R.id.bt_pre).setOnClickListener(this);
         findViewById(R.id.bt_next).setOnClickListener(this);
         TextView tvNumbers = (TextView) findViewById(R.id.tv_numbers);
-        tvNumbers.setText("0/"+dataBeans.size());
+        TextView tvDone = (TextView) findViewById(R.id.tv_done);
+        tvDone.setText("0");
+        tvNumbers.setText("/"+dataBeans.size());
 
     }
 
